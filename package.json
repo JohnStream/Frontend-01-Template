@@ -1,0 +1,22 @@
+{
+  "name": "learnfe",
+  "version": "1.0.0",
+  "description": "极客大学重学前端",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/JohnStream/Frontend-01-Template.git"
+  },
+  "author": "JohnStream",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/JohnStream/Frontend-01-Template/issues"
+  },
+  "homepage": "https://github.com/JohnStream/Frontend-01-Template#readme",
+  "devDependencies": {
+    "jest": "^25.5.0"
+  }
+}

@@ -6,7 +6,8 @@ module.exports = {
     "ts",
     "tsx",
     "node"
-],
-// A preset that is used as a base for Jest's configuration
-preset: "ts-jest"
+  ],
+  // A preset that is used as a base for Jest's configuration
+  preset: "ts-jest",
+  testMatch: [ '**/week03/**/*.js']
 }

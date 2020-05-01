@@ -1,4 +1,4 @@
-const { convertStringToNumber } = require('./index');
+const { convertStringToNumber,  convertNumberToString} = require('./index');
 
 describe(`string to number `, () => {
   test('string to number 10 by Decimal', () => {
@@ -15,5 +15,14 @@ describe(`string to number `, () => {
   });
   test('string to number 0x12 by hexadecimal', () => {
     expect(convertStringToNumber('0x12')).toBe(18);
+  });
+});
+
+describe(`number to string `, () => {
+  test('string to number 10', () => {
+    expect(convertNumberToString(10)).toBe('10');
+  });
+  test('string to number 0x12', () => {
+    expect(convertNumberToString(0x12)).toBe('18');
   });
 });

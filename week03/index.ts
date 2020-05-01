@@ -7,7 +7,7 @@ function convertStringToNumber(str: string, type : number = 10) {
   let strArray:Array<string> = []
   let isBinaryNumber = /^0b/.test(str)
   let isOctal = /^0o/.test(str)
-  let isScientific = /^(?!0x).*/.test(str) && /^(?!0X).*/.test(str) && /e/.test(str)
+  let isScientific = /^(?!0x).*/.test(str) && /^(?!0X).*/.test(str) && /e|E/.test(str)
   let isHexadecimal = /^0x/.test(str)
     if(isBinaryNumber) {
       type = 2
@@ -56,8 +56,8 @@ function convertStringToNumber(str: string, type : number = 10) {
     return sum;
 }
 
-function convertNumberToString(num: number) {
-
+function convertNumberToString(num: number, hex: number) {
+  return  num + ''
 }
 
 

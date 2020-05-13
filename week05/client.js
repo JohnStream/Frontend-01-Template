@@ -4,7 +4,11 @@ let client = net.createConnection({
 }, () => {
     // TODO: 这里有LF和CRLF的区别
     console.log('服务器链接成功')
-    client.write(`GET / HTTP/1.0\n\n`);
+    client.write(`GET / HTTP/1.0
+    x-for: 123
+    Content-Type: application/json
+    Auth: 123
+    \n\n`);
 });
 client.on('data', function (data) {
     console.log(data.toString());

@@ -1,29 +1,38 @@
 const net = require('net');
-// let str = 'Host: localhost:8080\r\n' + 'Accept: text/plain\r\n' + 'accept-encoding: gzip, deflate, br\r\n' + 'content-length: 3\r\n'
-let header = {
-    'Host': 'localhost:8080\r\n',
-    'Accept': 'accept-encoding: gzip, deflate, br\r\n',
-    'content-length': '3\r\n'
+
+function transforHeader(headers) {
+    let test = Object.keys(headers).map((key) => {
+        return key + ': ' + headers[key]
+    }).join('\r\n')
+    return test;
 }
-let test = Object.keys(header).map((key) => {
-    return key + ': ' + header[key]
-}).join('')
-console.log(test)
-console.log(typeof test)
-let client = net.createConnection({
-    port: 8080
-}, () => {
-    // TODO: 这里有LF和CRLF的区别
-    console.log('服务器链接成功')
-    client.write('GET / HTTP/1.1\r\n' + test + '\r\n' + '123');
-});
-client.on('data', function (data) {
-    // console.log(data.toString());
-    client.end();
-});
-client.on('end', function () {
-    console.log('断开与服务器的连接');
-});
-client.on('error', (err) => {
+
+function request(option, cb1, cb2) {
+    let client = net.createConnection({
+        port: option.port || 8080
+    }, () => {
+        console.log('服务器链接成功')
+        client.write(option.method + ' / HTTP/1.1\r\n' + transforHeader(option.headers) + '\r\n\r\n' + '123');
+    });
+    client.on('data', function (data) {
+        console.log(data)
+        console.log(Object.prototype.toString.call(data))
+        cb1(data.toString())
+        client.end();
+    });
+    client.on('end', function () {
+        console.log('断开与服务器的连接');
+    });
+    client.on('error', (err) => {
+        cb2(err)
+        console.log(err)
+    })
+}
+
+request({port:8080, method: 'GET', headers: {'Host': 'localhost:8080',
+'Accept': 'accept-encoding: gzip, deflate, br',
+'content-length': '3'}}, function cb1(data) {
+    console.log(data)
+},function cb2(err) {
     console.log(err)
 })
